@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Songs</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Upload Songs</h1>
+
+        <form action="/add_song" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="artist">Artist:</label>
+                <input type="text" class="form-control" id="artist" name="artist" required>
+            </div>
+            <div class="form-group">
+                <label for="file">Choose File (MP3 only):</label>
+                <input type="file" class="form-control-file" id="file" name="file" accept=".mp3" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+
+        <!-- Display uploaded songs -->
+        <div class="mt-5">
+            <h2>Uploaded Songs</h2>
+            {% if songs %}
+                <ul>
+                    {% for song in songs %}
+                        <li>{{ song.title }} - {{ song.artist }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No songs uploaded yet.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Songs</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Assuming you have Bootstrap included in your project -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+     <!-- Script for playing song with input file filePath -->
+    <script>
+        function redirectPlayingSong(filePath) {
+            var destinationURL = '/play_song/' + encodeURIComponent(filePath);
+            window.location.href = destinationURL;
+        }
+        function pauseSong(filePath) {
+        var pauseURL = '/play_song/' + encodeURIComponent(filePath);
+        window.location.href = pauseURL;
+    }
+    function resumeSong(filePath) {
+        var resumeURL = '/resume_song/' + encodeURIComponent(filePath);
+        window.location.href = resumeURL;
+    }
+    </script>
+    <!-- Additional JavaScript for Music Player -->
+    <script>
+        // Function to redirect and trigger delete operation
+        function deleteSong(songId) {
+            var confirmation = confirm("Are you sure you want to delete this song?");
+            if (confirmation) {
+                var deleteURL = '/delete_song/' + songId;
+                window.location.href = deleteURL;
+            }
+        }
+    </script>
+    <!-- Additional JavaScript for Music Player -->
+    <script>
+        function filterSongs() {
+            var input, filter, table, tbody, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("songTableBody");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0]; // Change index to the column you want to search
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1 class="mb-4">Play Songs</h1>
+    <!-- Search Bar -->
+    <div class="input-group search-bar">
+        <input type="text" class="form-control" placeholder="Search for a song..." id="searchInput" oninput="filterSongs()">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button" onclick="upload_audio.html">Search</button>
+        </div>
+    </div>
+
+        <!-- Display uploaded songs (example using a table) -->
+    <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+<!-- Your table code with Bootstrap styling -->
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Artist</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody id="songTableBody" >
+        {% for song in songs %}
+            <tr>
+                <td>{{ song.title }}</td>
+                <td>{{ song.artist }}</td>
+                <td>
+                    <button class="btn btn-success" onclick="redirectPlayingSong('{{ song.file_path }}')">Play</button>
+                    <button class="btn btn-success" onclick="redirectPlayingSong('{{ song.file_path }}')">Pause</button>
+                    <button class="btn btn-danger" onclick="deleteSong('{{ song.id }}')">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    </div>
+
+
+  
+</body>
+</html>

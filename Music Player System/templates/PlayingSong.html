@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing Song</title>
+    <style> body {
+        background-color: #f8f9fa;
+        font-family: 'Arial', sans-serif;
+    }
+    
+    .container {
+        text-align: center;
+    }
+    
+    h1 {
+        color: #333;
+    }
+    
+    .audio-player {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #f8f9fa;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+    
+    .audio-controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    
+    #playPauseBtn {
+        width: 80px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        padding: 8px;
+        cursor: pointer;
+    }
+    
+    #playPauseBtn:hover {
+        background-color: #0056b3;
+    }
+    
+    .audio-progress {
+        flex: 1;
+        margin: 0 10px;
+    }
+    
+    #progressBar {
+        width: 100%;
+    }
+    
+    .playlist {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+    }
+    
+    .playlist-item {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .playlist-item:hover {
+        background-color: #f0f0f0;
+    }
+    
+    .playlist-item.active {
+        background-color: #007bff;
+        color: #fff;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Music Player</h1> 
+        <div class="audio-player">
+            <div class="audio-controls">
+                <button class="btn btn-primary" id="playPauseBtn">Play</button>
+                <div class="audio-progress">
+                    <input type="range" id="progressBar" value="0">
+                </div>
+            </div>
+            <audio id="audioPlayer" controls>
+                Audio source will be added dynamically when a song is selected
+            </audio>
+        </div>
+
+    <h1>Hello  i am playing boss song</h1>
+</body>
+</html>
+
